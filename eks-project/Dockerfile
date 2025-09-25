@@ -1,19 +1,18 @@
-FROM node:14
+FROM node:18
 
-# Setting working directory. All the path will be relative to WORKDIR
+# Set working directory
 WORKDIR /usr/src/app
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
+# Copy package.json and install dependencies
 COPY package*.json ./
-
 RUN npm install
-# If you are building your code for production
-# RUN npm ci --only=production
 
-# Bundle app source
+# Copy rest of the app
 COPY . .
 
+# Expose port
 EXPOSE 3000
-CMD [ "node", "index.js" ]
+
+# Run the app
+CMD ["node", "app.js"]
+
